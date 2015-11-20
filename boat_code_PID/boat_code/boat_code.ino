@@ -14,7 +14,7 @@
 // Variable IDs for I/O
   	const int Analog_In_Manual_Throttle = A0;			// Analog Input : Manual throttle
   	const int Analog_In_Battery_Current= A1;			// Analog input :Battery measured current
-        const int Analog_In_Battery_Voltage_1 = A2;
+        const int Analog_In_Battery_Voltage_1 = A2; 
         const int Analog_In_Battery_Voltage_2 = A3;
         const int Analog_In_Battery_Voltage_3 = A4;
         
@@ -23,8 +23,8 @@
         const int Digital_In_Throttle_Mode = 7;				// Digital input : Throttle auto or manual
   	const int Digital_In_Timer_Mode = 8;				// Digital input : Timer on or off
         
-        const int ARresolution = 12;
-        const int AWresolution = 10;
+        const int ARresolution = 12; //Read Resolution
+        const int AWresolution = 10; //Write resolution
           
 //PWM setup
         
