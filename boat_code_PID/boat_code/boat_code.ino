@@ -43,21 +43,21 @@
         RunningMedian Mvoltage3 = RunningMedian(nFilter);
         
 // Variables for control loop
-	boolean Control_Mode = LOW;				// HIGH = auto, LOW = manual	
+	boolean Control_Mode = LOW; // HIGH = auto, LOW = manual	
 
-	const float Gain_Proportional = .04;				// Control loop proportional gain
-	const float Gain_Integral = .00004;					// Control loop integral gain
+	const float Gain_Proportional = .04; // Control loop proportional gain
+	const float Gain_Integral = .00004; // Control loop integral gain
         const float Gain_Derivative = 0.4;
-	const float Battery_Current_Ideal = zero_amps - (25 * .0128 / 3.3)*((1 << (AWresolution - 1)) - 1);			// Ideal battery current1
+	const float Battery_Current_Ideal = zero_amps - (25 * .0128 / 3.3)*((1 << (AWresolution - 1)) - 1); // Ideal battery current1, << is bit shift left, shifts bits left by 9
 	
         float Battery_Current = 0.0;
-        float Error_Proportional = 0.0;				// Present current error
-	float Error_Integral = 0.0;					// Current error integral
+        float Error_Proportional = 0.0;	// Present current error
+	float Error_Integral = 0.0; // Current error integral
         float Error_Derivative = 0.0;
         float Error_Last = 0.0;
         
 	float Throttle_Derivative = 0;
-	int Throttle_value = 0;					// Control present
+	int Throttle_value = 0;	// Control present
 
 
         RunningMedian Control_Manual = RunningMedian(nFilter);
@@ -135,7 +135,7 @@ void loopInstance() {
 	pwm_write_duty(Analog_Out_Motor_Throttle , (int)Throttle_value);
         
         Tlast = Tnow;
-        Tnow = micros();
+        Tnow = micros(); // The number of microseconds since the program started running
         
         Serial.print("TD=");
         Serial.print(Tnow - Tlast);
@@ -186,6 +186,6 @@ void setup(){
         analogReadResolution(ARresolution);
         pwm_set_resolution(AWresolution);
         
-        t.every(loopInterval, loopInstance);
+        t.every(loopInterval, loopInstance); // Timer library: calls the loopInstance function every loopInterval milliseconds, allows other things to happen in the background
         
 }
