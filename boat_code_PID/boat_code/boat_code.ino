@@ -8,9 +8,15 @@
         int Tlast = 0;
         int Tnow = 0;
         const int loopInterval = 75; //Milliseconds, 
-        const int nFilter = 25;
-        const int loopRead = 5;
-        Timer t;
+        const int nFilter = 25; //Number of samples looked at by Running Median
+        const int loopRead = 5; 
+        
+//Timer used so control loop is called every interval sending output signal simultaneously.
+//This is impossible with build in Delay IDE where a delay holds up all microcontroller functions.
+//This way current can be calcualted while sending a steady output signal to the motor controllers
+
+Timer t;
+
 // Variable IDs for I/O
   	const int Analog_In_Manual_Throttle = A0;			// Analog Input : Manual throttle
   	const int Analog_In_Battery_Current= A1;			// Analog input :Battery measured current
@@ -30,7 +36,7 @@
         
         
 // Variables for current measurement
-        const float bits_to_amps = 0.252;
+        const float bits_to_amps = 0.252; 
         const float zero_amps = (1 << (ARresolution - 2)) - 1;
         RunningMedian Mcurrent = RunningMedian(nFilter);
         
